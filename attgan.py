@@ -24,6 +24,7 @@ class Generator(nn.Module):
         self.inject_layers = min(inject_layers, dec_layers - 1)
         self.f_size = img_size // 2**enc_layers  # f_size = 4 for 128x128
         
+        # G_encoder layers
         layers = []
         n_in = 3
         for i in range(enc_layers):
@@ -34,6 +35,7 @@ class Generator(nn.Module):
             n_in = n_out
         self.enc_layers = nn.ModuleList(layers)
         
+        # G_decoder layers
         layers = []
         n_in = n_in + n_attrs  # 1024 + 13
         for i in range(dec_layers):
