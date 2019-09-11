@@ -88,14 +88,15 @@ for idx, (img_a, att_a) in enumerate(test_dataloader):
     img_a = img_a.cuda() if args.gpu else img_a
     att_a = att_a.cuda() if args.gpu else att_a
     att_a = att_a.type(torch.float)
-    
-    att_b_list = [att_a]
+    # print(args.n_attrs) 
+    # print(att_a)
+    att_b_list = []
     for i in range(args.n_attrs):
         tmp = att_a.clone()
         tmp[:, i] = 1 - tmp[:, i]
         tmp = check_attribute_conflict(tmp, args.attrs[i], args.attrs)
         att_b_list.append(tmp)
-
+    print(len(att_b_list))
     with torch.no_grad():
         samples = [img_a]
         for i, att_b in enumerate(att_b_list):

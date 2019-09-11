@@ -1,5 +1,6 @@
 output/
 .idea/
+data/celeba/
 
 .DS_Store
 data/.DS_Store
